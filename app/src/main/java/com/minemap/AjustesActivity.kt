@@ -1,10 +1,10 @@
 package com.minemap
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class AjustesActivity : AppCompatActivity() {
@@ -28,16 +28,18 @@ class AjustesActivity : AppCompatActivity() {
             val edicion = if (radioJava.isChecked) "Java" else "Bedrock"
             val clima = spinnerClima.selectedItem.toString()
 
-            // Aquí llamas a tu generador de Java (MundoGenerator)
+            // Obtener las coordenadas que enviamos desde el mapa
             val lat = intent.getDoubleExtra("LATITUD", 0.0)
             val lon = intent.getDoubleExtra("LONGITUD", 0.0)
+
+            // Ir a la pantalla de carga
+            val intentCarga = Intent(this, CargandoActivity::class.java)
+            intentCarga.putExtra("EDICION", edicion)
+            intentCarga.putExtra("LATITUD", lat)
+            intentCarga.putExtra("LONGITUD", lon)
+            // (El clima lo guardamos para después)
             
-            val mensaje = MundoGenerator.generarMundo(lat, lon, edicion)
-            
-            Toast.makeText(this, "Edición: $edicion | Clima: $clima\n$mensaje", Toast.LENGTH_LONG).show()
-            
-            // Cerrar esta pantalla y volver al mapa
-            finish()
+            startActivity(intentCarga)
         }
     }
 }
