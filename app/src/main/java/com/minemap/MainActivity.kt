@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
     private lateinit var searchBar: EditText
     private lateinit var btnOpenOptions: Button
+    private lateinit var btnMisMundos: Button // NUEVO BOTÓN
 
     // Coordenadas iniciales de Los Ángeles
     private var latitudSeleccionada = 34.0522
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         
         searchBar = findViewById(R.id.searchBar)
         btnOpenOptions = findViewById(R.id.btnOpenOptions)
+        btnMisMundos = findViewById(R.id.btnMisMundos) // Enlazamos el nuevo botón
 
         // Configurar el mapa
         mapView.getMapAsync { map ->
@@ -58,12 +60,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // BOTÓN ACTUALIZADO: Abre la pantalla de Ajustes
+        // BOTÓN: Abre la pantalla de Ajustes (Java/Bedrock/Clima)
         btnOpenOptions.setOnClickListener {
             val intent = Intent(this, AjustesActivity::class.java)
-            // Enviamos las coordenadas donde está el puntito a la nueva pantalla
             intent.putExtra("LATITUD", latitudSeleccionada)
             intent.putExtra("LONGITUD", longitudSeleccionada)
+            startActivity(intent)
+        }
+
+        // BOTÓN NUEVO: Abre la pantalla de Mis Mundos (Pestañas)
+        btnMisMundos.setOnClickListener {
+            val intent = Intent(this, MundosActivity::class.java)
             startActivity(intent)
         }
 
