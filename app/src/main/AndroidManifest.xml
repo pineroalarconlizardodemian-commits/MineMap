@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permiso necesario para que el mapa cargue -->
+    <!-- Permiso para que el mapa cargue -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permiso para guardar archivos en versiones antiguas de Android -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" 
+        android:maxSdkVersion="28" />
 
     <application
         android:allowBackup="true"
@@ -28,6 +32,9 @@
 
         <!-- 3. Pantalla de Carga (La barrita líquida) -->
         <activity android:name=".CargandoActivity" />
+
+        <!-- 4. Pantalla de Mis Mundos (Las pestañas) -->
+        <activity android:name=".MundosActivity" />
 
     </application>
 </manifest>
