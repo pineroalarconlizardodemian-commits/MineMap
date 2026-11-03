@@ -12,10 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AQUI_PEGA_TU_API_KEY_DE_GOOGLE_MAPS" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
