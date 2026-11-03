@@ -11,7 +11,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import java.io.File
 
 class CargandoActivity : AppCompatActivity() {
 
@@ -45,7 +44,6 @@ class CargandoActivity : AppCompatActivity() {
     private fun iniciarCarga() {
         val handler = Handler(Looper.getMainLooper())
         
-        // Simulamos la carga (aquí irá la lógica real de generación de bloques luego)
         val runnable = object : Runnable {
             override fun run() {
                 progreso += 2
@@ -56,15 +54,13 @@ class CargandoActivity : AppCompatActivity() {
                     txtEstado.text = "¡Mundo generado con éxito!"
                     btnExportar.visibility = View.VISIBLE
                     
-                    // Configurar el botón de exportar
                     configurarBotonExportar()
                 } else {
-                    // Cambiar textos según el progreso
                     if (progreso == 30) txtEstado.text = "Creando edificios..."
                     if (progreso == 60) txtEstado.text = "Añadiendo vegetación..."
                     if (progreso == 85) txtEstado.text = "Empaquetando archivo..."
                     
-                    handler.postDelayed(this, 50) // Velocidad de la barra
+                    handler.postDelayed(this, 50)
                 }
             }
         }
@@ -73,37 +69,29 @@ class CargandoActivity : AppCompatActivity() {
 
     private fun configurarBotonExportar() {
         btnExportar.setOnClickListener {
-            // Llamamos a Java para que nos devuelva el archivo generado
-            val archivoGenerado = MundoGenerator.generarMundo(lat, lon, edicion)
+            // Llamamos a Java con TODOS los parámetros: Context, Latitud, Longitud y Edición
+            val mensaje = MundoGenerator.generarMundo(this, lat, lon, edicion)
+            
+            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
 
-            if (edicion == "Java") {
-                // Abrir el explorador de archivos
-                Toast.makeText(this, "Mundo de Java guardado en Descargas (.zip)", Toast.LENGTH_LONG).show()
-                
-                // Intentar abrir el administrador de archivos
+            // Si es Bedrock, intentamos abrir el menú de "Abrir con..."
+            if (edicion == "Bedrock") {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.setDataAndType(Uri.parse("content://com.minemap.provider/mundo.mcworld"), "application/octet-stream")
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                try {
+                    startActivity(Intent.createChooser(intent, "Abrir mundo con..."))
+                } catch (e: Exception) {
+                    Toast.makeText(this, "El archivo se guardó en Descargas, ábrelo desde tu gestor de archivos", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                // Si es Java, abrimos el explorador de archivos
+                Toast.makeText(this, "Ve a tu carpeta de Descargas para extraer el .zip", Toast.LENGTH_LONG).show()
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.type = "resource/folder"
                 try {
                     startActivity(intent)
-                } catch (e: Exception) {
-                    Toast.makeText(this, "Busca el archivo en tu carpeta de Descargas", Toast.LENGTH_LONG).show()
-                }
-
-            } else {
-                // Para Bedrock, intentamos abrir el menú de "Abrir con..." directamente
-                Toast.makeText(this, "Abriendo Minecraft Bedrock...", Toast.LENGTH_SHORT).show()
-                
-                /* 
-                 * AQUÍ IRÁ LA LÓGICA REAL CUANDO TENGAMOS EL ARCHIVO .MCWORLD
-                 * Ejemplo:
-                 * val file = File(getExternalFilesDir(null), "mundo.mcworld")
-                 * val uri = FileProvider.getUriForFile(this, "${packageName}.provider", file)
-                 * val intent = Intent(Intent.ACTION_VIEW).apply {
-                 *     setDataAndType(uri, "application/octet-stream")
-                 *     addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                 * }
-                 * startActivity(Intent.createChooser(intent, "Abrir con..."))
-                 */
+                } catch (e: Exception) { }
             }
         }
     }
