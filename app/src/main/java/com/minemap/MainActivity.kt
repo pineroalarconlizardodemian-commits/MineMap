@@ -1,5 +1,6 @@
 package com.minemap
 
+import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.widget.Button
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Inicializar MapLibre (Mapa gratuito)
+        // Inicializar MapLibre
         MapLibre.getInstance(this)
         setContentView(R.layout.activity_main)
 
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
         // Configurar el mapa
         mapView.getMapAsync { map ->
-            // Usamos un estilo de mapa gratuito de OpenStreetMap
             map.setStyle("https://tiles.openfreemap.org/styles/liberty") { style ->
                 
                 // Mover la cámara a Los Ángeles
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                     .zoom(15.0)
                     .build()
 
-                // Detectar cuando el usuario mueve el mapa (CORREGIDO para evitar errores)
+                // Detectar cuando el usuario mueve el mapa
                 map.addOnCameraIdleListener {
                     val centro = map.cameraPosition.target
                     if (centro != null) {
@@ -58,10 +58,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Botón para generar el mundo
+        // BOTÓN ACTUALIZADO: Abre la pantalla de Ajustes
         btnOpenOptions.setOnClickListener {
-            val mensaje = MundoGenerator.generarMundo(latitudSeleccionada, longitudSeleccionada, "Java")
-            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+            val intent = Intent(this, AjustesActivity::class.java)
+            // Enviamos las coordenadas donde está el puntito a la nueva pantalla
+            intent.putExtra("LATITUD", latitudSeleccionada)
+            intent.putExtra("LONGITUD", longitudSeleccionada)
+            startActivity(intent)
         }
 
         // Lógica del Buscador (Geocoder)
@@ -86,7 +89,6 @@ class MainActivity : AppCompatActivity() {
                 val direccion = direcciones[0]
                 val nuevasCoordenadas = LatLng(direccion.latitude, direccion.longitude)
                 
-                // Mueve el mapa suavemente al lugar buscado
                 mapView.getMapAsync { map ->
                     map.animateCamera(
                         CameraUpdateFactory.newCameraPosition(
