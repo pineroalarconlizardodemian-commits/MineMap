@@ -22,7 +22,10 @@ jobs:
         cache: gradle
 
     - name: Compilar con Gradle (Debug)
-      run: gradle assembleDebug
+      uses: gradle/gradle-build-action@v2
+      with:
+        gradle-version: 8.4
+        arguments: assembleDebug
 
     - name: Subir el APK generado
       uses: actions/upload-artifact@v4
