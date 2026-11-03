@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1E1E2E"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aspecto del Mundo"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- SECCIÓN EDICIÓN -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plataforma de destino"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupEdicion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp">
+
+            <RadioButton
+                android:id="@+id/radioJava"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Minecraft Java (.zip para Launchers/PC)"
+                android:textColor="#FFFFFF"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radioBedrock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Minecraft Bedrock (.mcworld)"
+                android:textColor="#FFFFFF"/>
+        </RadioGroup>
+
+        <!-- SECCIÓN CLIMA -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clima"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerClima"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#333333"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- BOTÓN GENERAR -->
+        <Button
+            android:id="@+id/btnGenerarMundo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GENERAR MUNDO"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</ScrollView>
