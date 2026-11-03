@@ -7,10 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- 1. EL MAPA (Ocupa toda la pantalla) -->
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <!-- 1. EL MAPA (MapLibre) -->
+    <org.maplibre.android.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
