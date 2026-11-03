@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.maplibre.android.MapLibre
 import org.maplibre.android.camera.CameraPosition
+import org.maplibre.android.camera.CameraUpdateFactory
 import org.maplibre.android.geometry.LatLng
 import org.maplibre.android.maps.MapView
 import java.util.Locale
@@ -46,11 +47,13 @@ class MainActivity : AppCompatActivity() {
                     .zoom(15.0)
                     .build()
 
-                // Detectar cuando el usuario mueve el mapa
+                // Detectar cuando el usuario mueve el mapa (CORREGIDO para evitar errores)
                 map.addOnCameraIdleListener {
                     val centro = map.cameraPosition.target
-                    latitudSeleccionada = centro.latitude
-                    longitudSeleccionada = centro.longitude
+                    if (centro != null) {
+                        latitudSeleccionada = centro.latitude
+                        longitudSeleccionada = centro.longitude
+                    }
                 }
             }
         }
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 // Mueve el mapa suavemente al lugar buscado
                 mapView.getMapAsync { map ->
                     map.animateCamera(
-                        org.maplibre.android.camera.CameraUpdateFactory.newCameraPosition(
+                        CameraUpdateFactory.newCameraPosition(
                             CameraPosition.Builder().target(nuevasCoordenadas).zoom(16.0).build()
                         ), 
                         1000 // 1 segundo de animación
