@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Fondo del ícono (Azul oscuro) -->
+    <path
+        android:fillColor="#1E1E2E"
+        android:pathData="M0,0h108v108h-108z" />
+    <!-- Cubo de Minecraft (Verde) -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M54,25 L80,40 L80,70 L54,85 L28,70 L28,40 Z" />
+    <!-- Brillo del cubo (Verde claro) -->
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M54,25 L80,40 L54,55 L28,40 Z" />
+    <!-- Pin de ubicación (Rojo) -->
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M54,45 C48,45 44,49 44,55 C44,63 54,75 54,75 C54,75 64,63 64,55 C64,49 60,45 54,45 Z M54,58 C52.3,58 51,56.7 51,55 C51,53.3 52.3,52 54,52 C55.7,52 57,53.3 57,55 C57,56.7 55.7,58 54,58 Z" />
+</vector>
