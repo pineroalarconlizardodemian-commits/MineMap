@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1E1E2E"
+    android:padding="16dp">
+
+    <!-- Título de la pantalla -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mis Mundos"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Las 3 Pestañas -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333333"
+        app:tabTextColor="#AAAAAA"
+        app:tabSelectedTextColor="#4CAF50"
+        app:tabIndicatorColor="#4CAF50">
+
+        <com.google.android.material.tabs.TabItem
+            android:text="Todos" />
+
+        <com.google.android.material.tabs.TabItem
+            android:text="Java" />
+
+        <com.google.android.material.tabs.TabItem
+            android:text="Bedrock" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <!-- Lista donde aparecerán los mundos -->
+    <ListView
+        android:id="@+id/recyclerViewMundos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:divider="#444444"
+        android:dividerHeight="1dp"/>
+
+</LinearLayout>
