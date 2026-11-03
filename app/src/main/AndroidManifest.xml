@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permiso necesario para que el mapa cargue -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
+        <!-- 1. Pantalla Principal (El Mapa) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -20,5 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 2. Pantalla de Ajustes (Java/Bedrock/Clima) -->
+        <activity android:name=".AjustesActivity" />
+
+        <!-- 3. Pantalla de Carga (La barrita líquida) -->
+        <activity android:name=".CargandoActivity" />
+
     </application>
 </manifest>
